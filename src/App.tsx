@@ -24,7 +24,9 @@ function App() {
       return prev;
     });
     setLastClicked([row, col]);
+    setRound((prev) => prev + 1);
   }
+
   function threeInARow(row: number, col: number): number | false {
     // we check the last clicked tile to see if we have 3 in a row.
     // check row
@@ -62,7 +64,14 @@ function App() {
   if (!!winningPlayer) {
     return (
       <div>
-        <h1>Player {winningPlayer} Won the game!</h1>
+        <h1>Player {winningPlayer} won the game!</h1>
+      </div>
+    );
+  }
+  if (round >= 9) {
+    return (
+      <div>
+        <h1>It's a tie!</h1>
       </div>
     );
   }
