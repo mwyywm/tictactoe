@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 function ResetButton({ reset }: { reset: VoidFunction }) {
-  return <button onClick={() => reset()}>Reset game</button>;
+  return <button onClick={() => reset()}>Play again</button>;
 }
 
 function App() {
@@ -107,7 +107,12 @@ function App() {
           {row.map((_, colIndex) => (
             <div
               className="tile"
+              aria-labelledby="button"
+              id={`tile${rowIndex}${colIndex}`}
               key={`${rowIndex}${colIndex}`}
+              style={{
+                cursor: tiles[rowIndex][colIndex] >= 1 ? "default" : "pointer",
+              }}
               onClick={() => handleClick(currPlayer, rowIndex, colIndex)}
             >
               <p>

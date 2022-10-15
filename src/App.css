@@ -15,8 +15,24 @@
   width: 80px;
   height: 80px;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Rounded corners */
+#tile00 {
+  border-radius: 12px 0 0 0;
+}
+#tile02 {
+  border-radius: 0 12px 0 0;
+}
+#tile20 {
+  border-radius: 0 0 0 12px;
+}
+#tile22 {
+  border-radius: 0 0 12px 0;
 }
 /* TODO: remove this after the site is built */
 p {
   color: black;
+  font-size: 44px;
 }
