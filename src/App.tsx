@@ -1,6 +1,10 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 
+function ResetButton({ reset }: { reset: VoidFunction }) {
+  return <button onClick={() => reset()}>Reset game</button>;
+}
+
 function App() {
   const [currPlayer, setCurrPlayer] = useState<1 | 2>(1);
   const [lastClicked, setLastClicked] = useState<number[]>([0, 0]); // [row, col]
@@ -56,22 +60,39 @@ function App() {
     // No match was made returns false
     return false;
   }
+  function newGame(): void {
+    // reset all the states to their default values
+    setCurrPlayer(1);
+    setLastClicked([0, 0]);
+    setTiles([
+      [0, 0, 0],
+      [0, 0, 0],
+      [0, 0, 0],
+    ]);
+    setRound(0);
+    setWinningPlayer(false);
+  }
   useEffect(() => {
     if (!!threeInARow(lastClicked[0], lastClicked[1])) {
       setWinningPlayer(threeInARow(lastClicked[0], lastClicked[1]));
     }
   }, [currPlayer]);
+
   if (!!winningPlayer) {
+    // we have a winning player
     return (
       <div>
         <h1>Player {winningPlayer} won the game!</h1>
+        <ResetButton reset={newGame} />
       </div>
     );
   }
   if (round >= 9) {
+    // All the tiles are filled
     return (
       <div>
         <h1>It's a tie!</h1>
+        <ResetButton reset={newGame} />
       </div>
     );
   }
